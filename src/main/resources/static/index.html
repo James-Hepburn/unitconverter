@@ -102,82 +102,84 @@
         <button onclick = "showForm ('temperatureForm')">Temperature</button>
     </header>
 
-    <form id = "lengthForm" class = "formGroup active">
+    <form id = "lengthForm" class = "formGroup active" action = "/convert" method = "get">
         <label>Enter the length to convert</label>
-        <input type = "number" min = "0" id = "length">
+        <input type = "number" min = "0" id = "length" name = "amount" required>
 
         <label>Unit to convert from</label>
-        <select id = "convertFromLength">
-            <option>Millimeter (mm)</option>
-            <option>Centimeter (cm)</option>
-            <option>Inch (in)</option>
-            <option>Foot (ft)</option>
-            <option>Meter (m)</option>
-            <option>Yard (yd)</option>
-            <option>Kilometer (km)</option>
-            <option>Mile (mi)</option>
+        <select id = "convertFromLength" name = "from" required>
+            <option value = "mm">Millimeter (mm)</option>
+            <option value = "cm">Centimeter (cm)</option>
+            <option value = "in">Inch (in)</option>
+            <option value = "ft">Foot (ft)</option>
+            <option value = "m">Meter (m)</option>
+            <option value = "yd">Yard (yd)</option>
+            <option value = "km">Kilometer (km)</option>
+            <option value = "mi">Mile (mi)</option>
         </select>
 
         <label>Unit to convert to</label>
-        <select id = "convertToLength">
-            <option>Millimeter (mm)</option>
-            <option>Centimeter (cm)</option>
-            <option>Inch (in)</option>
-            <option>Foot (ft)</option>
-            <option>Meter (m)</option>
-            <option>Yard (yd)</option>
-            <option>Kilometer (km)</option>
-            <option>Mile (mi)</option>
+        <select id = "convertToLength" name = "to" required>
+            <option value = "mm">Millimeter (mm)</option>
+            <option value = "cm">Centimeter (cm)</option>
+            <option value = "in">Inch (in)</option>
+            <option value = "ft">Foot (ft)</option>
+            <option value = "m">Meter (m)</option>
+            <option value = "yd">Yard (yd)</option>
+            <option value = "km">Kilometer (km)</option>
+            <option value = "mi">Mile (mi)</option>
         </select>
 
-        <button>Convert</button>
+        <button type = "submit">Convert</button>
     </form>
 
-    <form id = "weightForm" class = "formGroup">
+    <form id = "weightForm" class = "formGroup" action = "/convert" method = "get">
         <label>Enter the weight to convert</label>
-        <input type = "number" min = "0" id = "weight">
+        <input type = "number" min = "0" id = "weight" name = "amount" required>
 
         <label>Unit to convert from</label>
-        <select id = "convertFromWeight">
-            <option>Milligram (mg)</option>
-            <option>Gram (g)</option>
-            <option>Ounce (oz)</option>
-            <option>Pound (lb)</option>
-            <option>Kilogram (kg)</option>
+        <select id = "convertFromWeight" name = "from" required>
+            <option value = "mg">Milligram (mg)</option>
+            <option value = "g">Gram (g)</option>
+            <option value = "oz">Ounce (oz)</option>
+            <option value = "lb">Pound (lb)</option>
+            <option value = "kg">Kilogram (kg)</option>
         </select>
 
         <label>Unit to convert to</label>
-        <select id = "convertToWeight">
-            <option>Milligram (mg)</option>
-            <option>Gram (g)</option>
-            <option>Ounce (oz)</option>
-            <option>Pound (lb)</option>
-            <option>Kilogram (kg)</option>
+        <select id = "convertToWeight" name = "to" required>
+            <option value = "mg">Milligram (mg)</option>
+            <option value = "g">Gram (g)</option>
+            <option value = "oz">Ounce (oz)</option>
+            <option value = "lb">Pound (lb)</option>
+            <option value = "kg">Kilogram (kg)</option>
         </select>
 
-        <button>Convert</button>
+        <button type = "submit">Convert</button>
     </form>
 
-    <form id = "temperatureForm" class = "formGroup">
+    <form id = "temperatureForm" class = "formGroup" action = "/convert" method = "get">
         <label>Enter the temperature to convert</label>
-        <input type = "number" min = "0" id = "temperature">
+        <input type = "number" min = "0" id = "temperature" name = "amount" required>
 
         <label>Unit to convert from</label>
-        <select id = "convertFromTemperature">
-            <option>Kelvin (K)</option>
-            <option>Celsius (°C)</option>
-            <option>Fahrenheit (°F)</option>
+        <select id = "convertFromTemperature" name = "from" required>
+            <option value = "K">Kelvin (K)</option>
+            <option value = "°C">Celsius (°C)</option>
+            <option value = "°F">Fahrenheit (°F)</option>
         </select>
 
         <label>Unit to convert to</label>
-        <select id = "convertToTemperature">
-            <option>Kelvin (K)</option>
-            <option>Celsius (°C)</option>
-            <option>Fahrenheit (°F)</option>
+        <select id = "convertToTemperature" name = "to" required>
+            <option value = "K">Kelvin (K)</option>
+            <option value = "°C">Celsius (°C)</option>
+            <option value = "°F">Fahrenheit (°F)</option>
         </select>
 
-        <button>Convert</button>
+        <button type = "submit">Convert</button>
     </form>
+
+    <div id = "result" style = "display: none; margin-bottom: 2rem; font-weight: bold;"></div>
 
     <script>
         function showForm (formId) {
@@ -187,6 +189,23 @@
             var activeForm = document.getElementById (formId);
             activeForm.classList.add ("active");
         }
+
+        window.addEventListener ('DOMContentLoaded', () => {
+            console.log('DOM fully loaded and parsed');
+
+            var params = new URLSearchParams (window.location.search);
+            var result = params.get ('result');
+            var amount = params.get ('amount');
+            var from = params.get ('from');
+            var to = params.get ('to');
+
+            console.log({result, amount, from, to});
+            var resultDiv = document.getElementById ("result");
+
+            resultDiv.style.display = "block";
+            resultDiv.style.color = "#333";
+            resultDiv.textContent = "Result: " + amount + " " + from + " equals " + result + " " + to;
+        });
     </script>
 </body>
 </html>
