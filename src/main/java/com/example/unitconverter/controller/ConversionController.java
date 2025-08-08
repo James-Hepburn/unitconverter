@@ -8,11 +8,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ConversionController {
-//    @GetMapping ("/")
-//    public String home () {
-//        return "index";
-//    }
-
     private UnitConversionService conversionService;
 
     public ConversionController (UnitConversionService conversionService) {
