@@ -2,9 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Unit Converter</title>
+
+    <style>
+        .formGroup {
+            display: none;
+        }
+
+        .formGroup.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <h1>Unit Converter</h1>
 
+    <header>
+        <button onclick = "showForm ('lengthForm')">Length</button>
+        <button onclick = "showForm ('weightForm')">Weight</button>
+        <button onclick = "showForm ('temperatureForm')">Temperature</button>
+    </header>
+
+    <form id = "lengthForm" class = "formGroup active">
+        <label>Enter the length to convert</label>
+        <input type = "number" min = "0" id = "length">
+
+        <label>Unit to convert from</label>
+        <select id = "convertFromLength">
+            <option>Millimeter (mm)</option>
+            <option>Centimeter (cm)</option>
+            <option>Inch (in)</option>
+            <option>Foot (ft)</option>
+            <option>Meter (m)</option>
+            <option>Yard (yd)</option>
+            <option>Kilometer (km)</option>
+            <option>Mile (mi)</option>
+        </select>
+
+        <label>Unit to convert to</label>
+        <select id = "convertToLength">
+            <option>Millimeter (mm)</option>
+            <option>Centimeter (cm)</option>
+            <option>Inch (in)</option>
+            <option>Foot (ft)</option>
+            <option>Meter (m)</option>
+            <option>Yard (yd)</option>
+            <option>Kilometer (km)</option>
+            <option>Mile (mi)</option>
+        </select>
+
+        <button>Convert</button>
+    </form>
+
+    <form id = "weightForm" class = "formGroup">
+        <label>Enter the weight to convert</label>
+        <input type = "number" min = "0" id = "weight">
+
+        <label>Unit to convert from</label>
+        <select id = "convertFromWeight">
+            <option>Milligram (mg)</option>
+            <option>Gram (g)</option>
+            <option>Ounce (oz)</option>
+            <option>Pound (lb)</option>
+            <option>Kilogram (kg)</option>
+        </select>
+
+        <label>Unit to convert to</label>
+        <select id = "convertToWeight">
+            <option>Milligram (mg)</option>
+            <option>Gram (g)</option>
+            <option>Ounce (oz)</option>
+            <option>Pound (lb)</option>
+            <option>Kilogram (kg)</option>
+        </select>
+
+        <button>Convert</button>
+    </form>
+
+    <form id = "temperatureForm" class = "formGroup">
+        <label>Enter the temperature to convert</label>
+        <input type = "number" min = "0" id = "temperature">
+
+        <label>Unit to convert from</label>
+        <select id = "convertFromTemperature">
+            <option>Kelvin (K)</option>
+            <option>Celsius (°C)</option>
+            <option>Fahrenheit (°F)</option>
+        </select>
+
+        <label>Unit to convert to</label>
+        <select id = "convertToTemperature">
+            <option>Kelvin (K)</option>
+            <option>Celsius (°C)</option>
+            <option>Fahrenheit (°F)</option>
+        </select>
+
+        <button>Convert</button>
+    </form>
+
+    <script>
+        function showForm (formId) {
+            var allForms = document.querySelectorAll (".formGroup");
+            allForms.forEach (currentForm => currentForm.classList.remove ('active'));
+
+            var activeForm = document.getElementById (formId);
+            activeForm.classList.add ("active");
+        }
+    </script>
 </body>
 </html>
