@@ -135,15 +135,33 @@ public class UnitConversionService {
     );
 
     public double toKelvin (double amount, String from) {
-        return 0;
+        if (from.equals ("°C")) {
+            return amount + 273.15;
+        } else if (from.equals ("°F")) {
+            return (amount - 32) * 5 / 9 + 273.15;
+        }
+
+        return amount;
     }
 
     public double toCelsius (double amount, String from) {
-        return 0;
+        if (from.equals ("K")) {
+            return amount - 273.15;
+        } else if (from.equals ("°F")) {
+            return (amount - 32) * 5 / 9;
+        }
+
+        return amount;
     }
 
     public double toFahrenheit (double amount, String from) {
-        return 0;
+        if (from.equals ("K")) {
+            return (amount - 273.15) * 9 / 5 + 32;
+        } else if (from.equals ("°C")) {
+            return amount * 9 / 5 + 32;
+        }
+
+        return amount;
     }
 
     public double convert (double amount, String from, String to) {
