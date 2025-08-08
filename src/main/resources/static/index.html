@@ -199,9 +199,11 @@
 
             var resultDiv = document.getElementById ("result");
 
-            resultDiv.style.display = "block";
-            resultDiv.style.color = "#333";
-            resultDiv.textContent = "Result: " + amount + " " + from + " equals " + result + " " + to;
+            if (result) {
+                resultDiv.style.display = "block";
+                resultDiv.style.color = "#333";
+                resultDiv.textContent = "Result: " + amount + " " + from + " equals " + result + " " + to;
+            }
         });
     </script>
 </body>
